@@ -37,10 +37,6 @@ var dayFiveHumidity = document.getElementById("day5-humidity");
 
 var searchHistory = [];
 
-// add to seach history
-
-// click on search history to be taken back
-
 // calls getCity function once user types in city and clicks search
 search.addEventListener("input", (e) => {
   e.preventDefault();
@@ -128,10 +124,38 @@ function getWeather(lat, lon) {
 }
 
 function saveCity(city) {
-  console.log(city);
   searchHistory.push(city);
   var uniqueCities = [...new Set(searchHistory)];
-  console.log(searchHistory);
   console.log(uniqueCities);
   localStorage.setItem("city", JSON.stringify(uniqueCities));
 }
+
+// TODO: fix render function to update when item is added to local storage
+// why are cities repeating so much???
+
+// TODO: add event listeners to rendered storage
+// add event listener, set city (param) to event.target.value, call getCity()
+
+// TODO: add weather icons
+
+function renderSearchHistory() {
+  var searchItems = JSON.parse(localStorage.getItem("city"));
+  console.log(searchItems);
+  var list = document.getElementById("search-list");
+  for (i = 0; i < searchItems.length; i++) {
+    if (searchItems !== null) {
+      console.log(searchItems[i]);
+      var pastSearch = document.createElement("li");
+      pastSearch.classList.add("list-group-item");
+      pastSearch.appendChild(document.createTextNode(searchItems[i]));
+      list.appendChild(pastSearch);
+    }
+  }
+  return;
+}
+
+function init() {
+  renderSearchHistory();
+}
+
+init();
