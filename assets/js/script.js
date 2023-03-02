@@ -1,10 +1,11 @@
 // all variables used
 var city;
-var coordinates = [];
+var lat = "";
+var lon = "";
 var search = document.getElementById("search-bar");
 var button = document.getElementById("search-button");
 
-var currentWeather = document.getElementById('current-weather');
+var currentWeather = document.getElementById("current-weather");
 
 // base url
 var requestUrl =
@@ -44,12 +45,28 @@ function getCity(city) {
     })
     .then(function (data) {
       console.log(data);
-      //   lat = data[0].lat;
-      //   lat.push(data[0].lat);
-      //   lon.push(data[0].lon);
-      coordinates.push(data[0].lat, data[0].lon);
+      lat = data[0].lat;
+      lon = data[0].lon;
+      getWeather(lat, lon);
     });
 }
 
-// getCity(city);
-console.log(coordinates);
+function getWeather(lat, lon) {
+  fetch(
+    "http://api.openweathermap.org/data/2.5/forecast?lat=" +
+      lat +
+      "&lon=" +
+      lon +
+      "&appid=e47eb086d90f9e94737e6cf64acdd28a"
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(city);
+      console.log(data.list[0].main.temp);
+      console.log(data.list[0].main.humidity);
+      console.log(data.list[0].wind.speed);
+      console.log(data.list[0].dt_txt);
+    });
+}
