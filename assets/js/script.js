@@ -50,9 +50,17 @@ var requestUrl =
 // click on search history to be taken back
 
 search.addEventListener("input", (e) => {
+  e.preventDefault();
   city = e.target.value;
   console.log(city);
-  button.addEventListener("click", getCity(city));
+  button.addEventListener("click", function () {
+    getCity(city);
+  });
+
+  // button.addEventListener("click", function (event) {
+  //   console.log(event.target);
+  //   console.log("hi!");
+  // });
 });
 
 // retrieves latitude and longitude from city requested
