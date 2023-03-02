@@ -35,32 +35,21 @@ var dayThreeHumidity = document.getElementById("day3-humidity");
 var dayFourHumidity = document.getElementById("day4-humidity");
 var dayFiveHumidity = document.getElementById("day5-humidity");
 
-// base url
-var requestUrl =
-  "api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=e47eb086d90f9e94737e6cf64acdd28a";
+var searchHistory = [];
 
-// search for city
-
-// show current and future conditions
 // add to seach history
-
-// current weather shows city name, date, icon, temp, humidity, wind speed
-// future weather shows 5 day forecast with dates, icon, temp, wind speed, humidity
 
 // click on search history to be taken back
 
+// calls getCity function once user types in city and clicks search
 search.addEventListener("input", (e) => {
   e.preventDefault();
   city = e.target.value;
   console.log(city);
   button.addEventListener("click", function () {
+    saveCity(city);
     getCity(city);
   });
-
-  // button.addEventListener("click", function (event) {
-  //   console.log(event.target);
-  //   console.log("hi!");
-  // });
 });
 
 // retrieves latitude and longitude from city requested
@@ -74,13 +63,13 @@ function getCity(city) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       lat = data[0].lat;
       lon = data[0].lon;
       getWeather(lat, lon);
     });
 }
 
+// retrieves and adds weather data to html elements
 function getWeather(lat, lon) {
   fetch(
     "http://api.openweathermap.org/data/2.5/forecast?lat=" +
@@ -93,12 +82,7 @@ function getWeather(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data.list);
-      //   console.log(data.city.name);
-      //   console.log(data.list[0].dt_txt);
-      //   console.log(data.list[0].main.temp);
-      //   console.log(data.list[0].wind.speed);
-      //   console.log(data.list[0].main.humidity);
+      // current day's weather
       currentCity.textContent =
         data.city.name + " " + data.list[0].dt_txt.slice(0, 10);
       currentTemp.textContent = "Temp: " + data.list[0].main.temp + "\u2109";
@@ -106,6 +90,7 @@ function getWeather(lat, lon) {
       currentHumidity.textContent =
         "Humidity: " + data.list[0].main.humidity + "%";
 
+      // future 5 day's weather
       dayOneDate.textContent = data.list[7].dt_txt.slice(0, 10);
       dayOneTemp.textContent = "Temp: " + data.list[7].main.temp_max + "\u2109";
       dayOneWind.textContent = "Wind: " + data.list[7].wind.speed + " MPH";
@@ -140,4 +125,13 @@ function getWeather(lat, lon) {
       dayFiveHumidity.textContent =
         "Humidity: " + data.list[39].main.humidity + "%";
     });
+}
+
+function saveCity(city) {
+  console.log(city);
+  searchHistory.push(city);
+  var uniqueCities = [...new Set(searchHistory)];
+  console.log(searchHistory);
+  console.log(uniqueCities);
+  localStorage.setItem("city", JSON.stringify(uniqueCities));
 }
