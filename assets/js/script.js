@@ -5,7 +5,11 @@ var lon = "";
 var search = document.getElementById("search-bar");
 var button = document.getElementById("search-button");
 
+var currentCity = document.getElementById("city-and-date");
 var currentWeather = document.getElementById("current-weather");
+var currentTemp = document.getElementById("current-temp");
+var currentWind = document.getElementById("current-wind");
+var currentHumidity = document.getElementById("current-humidity");
 
 // base url
 var requestUrl =
@@ -20,12 +24,6 @@ var requestUrl =
 // future weather shows 5 day forecast with dates, icon, temp, wind speed, humidity
 
 // click on search history to be taken back
-
-// button.addEventListener("click", input);
-
-// function input() {
-//   console.log(search.value);
-// }
 
 search.addEventListener("input", (e) => {
   city = e.target.value;
@@ -63,10 +61,16 @@ function getWeather(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log(city);
-      console.log(data.list[0].main.temp);
-      console.log(data.list[0].main.humidity);
-      console.log(data.list[0].wind.speed);
-      console.log(data.list[0].dt_txt);
+      //   console.log(data.city.name);
+      //   console.log(data.list[0].dt_txt);
+      //   console.log(data.list[0].main.temp);
+      //   console.log(data.list[0].wind.speed);
+      //   console.log(data.list[0].main.humidity);
+      currentCity.textContent =
+        data.city.name + " " + data.list[0].dt_txt.slice(0, 10);
+      currentTemp.textContent = "Temp: " + data.list[0].main.temp + "\u2109";
+      currentWind.textContent = "Wind: " + data.list[0].wind.speed + " MPH";
+      currentHumidity.textContent =
+        "Humidity: " + data.list[0].main.humidity + "%";
     });
 }
