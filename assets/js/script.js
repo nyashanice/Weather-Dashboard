@@ -1,4 +1,4 @@
-// all variables used
+// variables used
 var city;
 var lat = "";
 var lon = "";
@@ -6,7 +6,7 @@ var search = document.getElementById("search-bar");
 var button = document.getElementById("search-button");
 
 var currentCity = document.getElementById("city-and-date");
-var currentWeather = document.getElementById("current-weather");
+var currentWeather = document.getElementById("weather-icon");
 var currentTemp = document.getElementById("current-temp");
 var currentWind = document.getElementById("current-wind");
 var currentHumidity = document.getElementById("current-humidity");
@@ -16,6 +16,12 @@ var dayTwoDate = document.getElementById("day2-date");
 var dayThreeDate = document.getElementById("day3-date");
 var dayFourDate = document.getElementById("day4-date");
 var dayFiveDate = document.getElementById("day5-date");
+
+var dayOneIcon = document.getElementById("day1-weather");
+var dayTwoIcon = document.getElementById("day2-weather");
+var dayThreeIcon = document.getElementById("day3-weather");
+var dayFourIcon = document.getElementById("day4-weather");
+var dayFiveIcon = document.getElementById("day5-weather");
 
 var dayOneTemp = document.getElementById("day1-temp");
 var dayTwoTemp = document.getElementById("day2-temp");
@@ -36,12 +42,12 @@ var dayFourHumidity = document.getElementById("day4-humidity");
 var dayFiveHumidity = document.getElementById("day5-humidity");
 
 var searchHistory = [];
+var searchItems;
 
 // calls getCity function once user types in city and clicks search
 search.addEventListener("input", (e) => {
   e.preventDefault();
   city = e.target.value;
-  console.log(city);
   button.addEventListener("click", function () {
     saveCity(city);
     getCity(city);
@@ -123,38 +129,38 @@ function getWeather(lat, lon) {
     });
 }
 
+// saves city to array in local storage
 function saveCity(city) {
+  searchItems = JSON.parse(localStorage.getItem("city"));
   searchHistory.push(city);
   var uniqueCities = [...new Set(searchHistory)];
-  console.log(uniqueCities);
   localStorage.setItem("city", JSON.stringify(uniqueCities));
 }
 
-// TODO: fix render function to update when item is added to local storage
-// why are cities repeating so much???
+// loads search history when accessing page
+function loadSearchHistory() {
+  searchItems = JSON.parse(localStorage.getItem("city"));
+  if (!searchItems) {
+    localStorage.setItem("city", JSON.stringify([]));
+  }
+}
 
-// TODO: add event listeners to rendered storage
-// add event listener, set city (param) to event.target.value, call getCity()
-
-// TODO: add weather icons
-
+// shows search history as a list on left side of page
 function renderSearchHistory() {
-  var searchItems = JSON.parse(localStorage.getItem("city"));
-  console.log(searchItems);
+  searchItems = JSON.parse(localStorage.getItem("city"));
   var list = document.getElementById("search-list");
   for (i = 0; i < searchItems.length; i++) {
     if (searchItems !== null) {
-      console.log(searchItems[i]);
       var pastSearch = document.createElement("li");
       pastSearch.classList.add("list-group-item");
       pastSearch.appendChild(document.createTextNode(searchItems[i]));
       list.appendChild(pastSearch);
     }
   }
-  return;
 }
 
 function init() {
+  loadSearchHistory();
   renderSearchHistory();
 }
 

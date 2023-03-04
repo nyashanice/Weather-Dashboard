@@ -15,62 +15,68 @@
 </header>
 <body>
     <main>
-<div class="d-flex flex-row">
-    <div id="search-bar" class="w-25 m-3">
-        <h3>Search for a City</h3>
-        <div class="input-group">
-            <input id="search-box" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                aria-describedby="search-addon" />
-            <button id="search-button" type="button" class="btn btn-outline-primary">search</button>
+    <div class="d-flex flex-row">
+        <div id="search-bar" class="w-25 m-3">
+            <h3>Search for a City</h3>
+            <div class="input-group">
+                <input id="search-box" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                    aria-describedby="search-addon" />
+                <button id="search-button" type="button" class="btn btn-outline-primary">search</button>
+            </div>
+            <div id="past-searches">
+                <ul id="search-list" class="list-group"></ul>
+            </div>
         </div>
-        <div id="past-searches">
-            <ul id="search-list" class="list-group"></ul>
-        </div>
-    </div>
-    <div id="info" class="w-75 m-3">
-        <div id="current-weather" class="border border-dark">
-            <h3 id="city-and-date"></h3>
-            <p id="current-temp"></p>
-            <p id="current-wind"></p>
-            <p id="current-humidity"></p>
-        </div>
-        <div id="future-weather">
-            <h3>5-Day Forecast</h3>
-            <div class="d-flex flex-row text-white">
-                <div class="future bg-dark m-1">
-                    <h5 id="day1-date"></h5>
-                    <p id="day1-temp"></p>
-                    <p id="day1-wind"></p>
-                    <p id="day1-humidity"></p>
-                </div>
-                <div class="future bg-dark m-1">
-                    <h5 id="day2-date"></h5>
-                    <p id="day2-temp"></p>
-                    <p id="day2-wind"></p>
-                    <p id="day2-humidity"></p>
-                </div>
-                <div class="future bg-dark m-1">
-                    <h5 id="day3-date"></h5>
-                    <p id="day3-temp"></p>
-                    <p id="day3-wind"></p>
-                    <p id="day3-humidity"></p>
-                </div>
-                <div class="future bg-dark m-1">
-                    <h5 id="day4-date"></h5>
-                    <p id="day4-temp"></p>
-                    <p id="day4-wind"></p>
-                    <p id="day4-humidity"></p>
-                </div>
-                <div class="future bg-dark m-1">
-                    <h5 id="day5-date"></h5>
-                    <p id="day5-temp"></p>
-                    <p id="day5-wind"></p>
-                    <p id="day5-humidity"></p>
+        <div id="info" class="w-75 m-3">
+            <div id="current-weather" class="border border-dark">
+                <h3 id="city-and-date"></h3>
+                <a id="weather-icon" ><i></i></a>
+                <p id="current-temp"></p>
+                <p id="current-wind"></p>
+                <p id="current-humidity"></p>
+            </div>
+            <div id="future-weather">
+                <h3>5-Day Forecast</h3>
+                <div class="d-flex flex-row text-white">
+                    <div class="future bg-dark m-1">
+                        <h5 id="day1-date"></h5>
+                        <i id="day1-weather"></i>
+                        <p id="day1-temp"></p>
+                        <p id="day1-wind"></p>
+                        <p id="day1-humidity"></p>
+                    </div>
+                    <div class="future bg-dark m-1">
+                        <h5 id="day2-date"></h5>
+                        <i id="day2-weather"></i>
+                        <p id="day2-temp"></p>
+                        <p id="day2-wind"></p>
+                        <p id="day2-humidity"></p>
+                    </div>
+                    <div class="future bg-dark m-1">
+                        <h5 id="day3-date"></h5>
+                        <i id="day3-weather"></i>
+                        <p id="day3-temp"></p>
+                        <p id="day3-wind"></p>
+                        <p id="day3-humidity"></p>
+                    </div>
+                    <div class="future bg-dark m-1">
+                        <h5 id="day4-date"></h5>
+                        <i id="day4-weather"></i>
+                        <p id="day4-temp"></p>
+                        <p id="day4-wind"></p>
+                        <p id="day4-humidity"></p>
+                    </div>
+                    <div class="future bg-dark m-1">
+                        <h5 id="day5-date"></h5>
+                        <i id="day5-weather"></i>
+                        <p id="day5-temp"></p>
+                        <p id="day5-wind"></p>
+                        <p id="day5-humidity"></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     </main>
     <script src="/assets/js/script.js"></script>
 </body>
