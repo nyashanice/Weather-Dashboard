@@ -57,7 +57,7 @@ search.addEventListener("input", (e) => {
 // retrieves latitude and longitude from city requested
 function getCity(city) {
   fetch(
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
       city +
       "&limit=1&appid=e47eb086d90f9e94737e6cf64acdd28a"
   )
@@ -74,7 +74,7 @@ function getCity(city) {
 // retrieves and adds weather data to html elements
 function getWeather(lat, lon) {
   fetch(
-    "http://api.openweathermap.org/data/2.5/forecast?lat=" +
+    "https://api.openweathermap.org/data/2.5/forecast?lat=" +
       lat +
       "&lon=" +
       lon +
